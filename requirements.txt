@@ -1,0 +1,5 @@
+pyspark
+delta-spark
+faker
+pandas
+azure-storage-blob
