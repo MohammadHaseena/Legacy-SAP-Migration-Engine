@@ -119,6 +119,15 @@ Legacy-SAP-Migration-Engine
 
 ---
 
+## Test Data
+
+- data_generator/generate_sap_data_small.py: small dataset (Faker + Pandas), for local testing
+- data_generator/generate_sap_data_spark.py: 1M orders and 5K customers, run in Databricks,
+  with injected defects: duplicates, negative prices, missing materials,
+  mixed date formats, and orphan customers
+
+---
+
 ## Features
 
 - Medallion Architecture
