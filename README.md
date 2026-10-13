@@ -107,10 +107,12 @@ Legacy-SAP-Migration-Engine
 
 ## Silver Layer
 
-- Remove duplicate records
-- Remove NULL values
-- Standardize mixed date formats
-- Quarantine invalid records
+- Deduplicate on the business key
+- Parse four date formats (dd/MM/yyyy, yyyy-MM-dd, yyyyMMdd, dd.MM.yyyy)
+- Invalid rows go to quarantine_error_log with an ERROR_REASON
+  (MISSING_MATERIAL, NULL_OR_INVALID_NET_PRICE, NEGATIVE_NET_PRICE, UNPARSEABLE_DATE)
+- Row-count check: bronze = silver + quarantine, or the run fails
+- Idempotent writes (replaceWhere): reruns never duplicate data
 
 ---
 
@@ -120,6 +122,23 @@ Legacy-SAP-Migration-Engine
 - Revenue aggregation by Region
 - Transaction summary
 - Delta optimization
+
+---
+
+## Orchestration
+
+Airflow (run locally with the Astro CLI and Docker) triggers the Databricks Job
+`sap_medallion` daily through the Databricks provider. The job runs bronze, silver,
+and gold as separate tasks. The run date is passed from Airflow ({{ ds }}) and writes
+are idempotent (replaceWhere), so retries and reruns never duplicate data.
+
+### Airflow DAG Run
+
+![Airflow DAG](images/07_airflow_dag_run.png)
+
+### Databricks Job Run
+
+![Databricks Job](images/06_databricks_job_run.png)
 
 ---
 
