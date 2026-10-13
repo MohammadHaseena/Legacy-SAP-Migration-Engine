@@ -62,6 +62,10 @@ Transaction Count
 
 ![Catalog](images/04_databricks_catalog.png)
 
+### Quarantine Summary
+
+![Quarantine Summary](images/05_quarantine_summary.png)
+
 ## Tech Stack
 
 - Python
