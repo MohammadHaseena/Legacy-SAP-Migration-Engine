@@ -11,6 +11,9 @@ The pipeline follows the Medallion Architecture (Bronze, Silver, Gold) to ingest
 ## Architecture
 
 ```
+Airflow (daily trigger)
+        │
+        ▼
 SAP CSV Files
         │
         ▼
@@ -83,14 +86,18 @@ Transaction Count
 ```
 Legacy-SAP-Migration-Engine
 │
+├── airflow/
+│   └── dags/
+│       └── sap_medallion_dag.py
 ├── data_generator/
 ├── datasets/
 ├── databricks/
 │   ├── 01_Bronze_Layer.py
 │   ├── 02_Silver_Layer.py
 │   └── 03_Gold_Layer.py
-│
-├── ingestion/
+│   └── sap_pipeline_v2.py
+|
+├── images/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
@@ -164,8 +171,6 @@ are idempotent (replaceWhere), so retries and reruns never duplicate data.
 
 ## Future Improvements
 
-- Azure Data Factory Integration
-- Azure Blob Storage
-- Automated Scheduling
-- CI/CD Pipeline
+- Star-schema gold layer with SQL analytics
+- Unit tests and GitHub Actions CI
 - Power BI Dashboard
