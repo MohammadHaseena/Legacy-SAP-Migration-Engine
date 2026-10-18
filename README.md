@@ -149,6 +149,18 @@ are idempotent (replaceWhere), so retries and reruns never duplicate data.
 
 ---
 
+## Dimensional Model (Star Schema)
+
+- fact_sales: one row per order (keys + NET_PRICE)
+- dim_customer, dim_material, dim_date
+- Orders whose customer is missing from the master point to an UNKNOWN row,
+  so no revenue is dropped
+- Validation: fact_sales row count equals silver, and revenue by region matches the gold summary
+- 6 business queries (monthly revenue, top customers, top materials per region,
+  running total, month-over-month growth) in sql/star_schema_queries.sql
+
+---
+
 ## Test Data
 
 - data_generator/generate_sap_data_small.py: small dataset (Faker + Pandas), for local testing
