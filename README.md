@@ -97,6 +97,7 @@ Legacy-SAP-Migration-Engine
 │   └── 03_Gold_Layer.py
 │   └── sap_pipeline_v2.py
 |   |__gold_star_schema.py
+|   |__src/
 |
 ├── images/
 ├── README.md
