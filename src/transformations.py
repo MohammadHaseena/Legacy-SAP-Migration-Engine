@@ -15,7 +15,7 @@ def parse_dates(df, col="CREATED_ON"):
 
 def cast_price(df, col="NET_PRICE"):
     """Cast price text to decimal; invalid text becomes NULL."""
-    return df.withColumn(col, F.col(col).cast("decimal(18,2)"))
+    return df.withColumn(col, F.expr(f"try_cast({col} AS DECIMAL(18,2))"))
 
 
 def tag_errors(df):
