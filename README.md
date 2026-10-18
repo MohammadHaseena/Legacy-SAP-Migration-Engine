@@ -183,6 +183,5 @@ are idempotent (replaceWhere), so retries and reruns never duplicate data.
 
 ## Future Improvements
 
-- Star-schema gold layer with SQL analytics
 - Unit tests and GitHub Actions CI
 - Power BI Dashboard
