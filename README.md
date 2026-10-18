@@ -9,6 +9,15 @@ The pipeline follows the Medallion Architecture (Bronze, Silver, Gold) to ingest
 
 ---
 
+## Dashboard
+
+![Dashboard](images/08_dashboard.png)
+
+Built on the gold star schema (revenue by month and region, top customers)
+plus data quality metrics (quarantine rate and counts by reason).
+
+---
+
 ## Architecture
 
 ```
@@ -101,6 +110,7 @@ Legacy-SAP-Migration-Engine
 |   |__src/
 |   |__tests/
 |   |__sql/
+|       |_dashboard_queries.sql
 |   |__.github/workflows/
 |
 ├── images/
@@ -187,6 +197,3 @@ are idempotent (replaceWhere), so retries and reruns never duplicate data.
 
 ---
 
-## Future Improvements
-
-- Power BI Dashboard
