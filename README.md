@@ -1,4 +1,5 @@
 # Legacy SAP Migration Engine
+![tests](https://github.com/MohammadHaseena/Legacy-SAP-Migration-Engine/actions/workflows/ci.yml/badge.svg)
 
 ## Project Overview
 
@@ -98,6 +99,9 @@ Legacy-SAP-Migration-Engine
 │   └── sap_pipeline_v2.py
 |   |__gold_star_schema.py
 |   |__src/
+|   |__tests/
+|   |__sql/
+|   |__.github/workflows/
 |
 ├── images/
 ├── README.md
@@ -185,5 +189,4 @@ are idempotent (replaceWhere), so retries and reruns never duplicate data.
 
 ## Future Improvements
 
-- Unit tests and GitHub Actions CI
 - Power BI Dashboard
