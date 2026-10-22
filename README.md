@@ -130,12 +130,15 @@ Legacy-SAP-Migration-Engine
 
 ## Silver Layer
 
-- Deduplicate on the business key
+- Deduplicate on the business key (SALES_DOC) and cast NET_PRICE to decimal
 - Parse four date formats (dd/MM/yyyy, yyyy-MM-dd, yyyyMMdd, dd.MM.yyyy)
-- Invalid rows go to quarantine_error_log with an ERROR_REASON
-  (MISSING_MATERIAL, NULL_OR_INVALID_NET_PRICE, NEGATIVE_NET_PRICE, UNPARSEABLE_DATE)
-- Row-count check: bronze = silver + quarantine, or the run fails
-- Idempotent writes (replaceWhere): reruns never duplicate data
+- Validation rules, applied in priority order (first match wins); invalid rows go to
+  quarantine_error_log with an ERROR_REASON: MISSING_MATERIAL, NULL_OR_INVALID_NET_PRICE,
+  NEGATIVE_NET_PRICE, UNPARSEABLE_DATE
+- Upsert (Delta MERGE) on SALES_DOC into silver and quarantine: reprocessing the same
+  orders under a new run date updates them instead of duplicating them
+- Reconciliation across all runs: silver has no duplicate orders, and
+  silver + quarantine = distinct orders in bronze, or the run fails
 
 ---
 
